@@ -97,6 +97,21 @@ app.delete("/api/admin/users/:userId", verifyAdminToken, async (req, res) => {
   }
 });
 
+// Career-hub related endpoints can be added here in the future
+
+app.get("/api/career-hub" , async(req, res) => {  
+  try {
+    const db = await connectDB();
+    const careerHubData = await db.collection("career-hub").find({}).toArray();
+    res.json(careerHubData);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch career hub data" });
+  }
+});
+
+
+
+
 app.listen(port, () => {
   console.log(`IIUC Connect backend running on port ${port}`);
 });
